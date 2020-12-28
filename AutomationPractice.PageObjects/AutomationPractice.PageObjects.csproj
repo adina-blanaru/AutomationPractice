@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\UserCredentialsDto.cs" />
     <Compile Include="Dto\UserDataDto.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Actions.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Locators.cs" />

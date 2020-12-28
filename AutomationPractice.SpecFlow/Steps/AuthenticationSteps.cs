@@ -33,6 +33,20 @@ namespace AutomationPractice.SpecFlow.Steps
             registrationPage.FillRegisterForm(myUser);
         }
 
+        [When(@"I login with credentials")]
+        public void WhenILoginWithCredentials(Table table)
+        {
+            var userCredentials = table.CreateInstance<UserCredetialsDto>();
+            authenticationPage.LoginWithCredentials(userCredentials);
+        }
+
+        [Then(@"I should see the '(.*)' authentication error")]
+        public void ThenIShouldSeeTheAuthenticationError(string error)
+        {
+            Assert.AreEqual(error, authenticationPage.GetAuthenticationError());
+        }
+
+
         [Then(@"I should see the '(.*)' page")]
         public void ThenIShouldSeeThePage(string page)
         {

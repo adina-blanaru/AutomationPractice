@@ -21,7 +21,7 @@ namespace AutomationPractice.PageObjects.PageObjects
         private SelectElement StateDropdown => new SelectElement(_driver.FindElement(By.Id("id_state")));
         private SelectElement CountryDropdown => new SelectElement(_driver.FindElement(By.Id("id_country")));
         private IWebElement MobilePhoneTextBox => _driver.FindElement(By.Id("phone_mobile"));
-        private IWebElement AliasAddressTextBox => _driver.FindElement(By.Id("alias"));
+        private IWebElement AddressAliasTextBox => _driver.FindElement(By.Id("alias"));
         private IWebElement RegisterButton => _driver.FindElement(By.Id("submitAccount"));
     }
 }
