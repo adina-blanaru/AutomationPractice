@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 
 namespace AutomationPractice.PageObjects.PageObjects
@@ -29,14 +30,41 @@ namespace AutomationPractice.PageObjects.PageObjects
             return PageBreadcrumbs.Text.Split('>');
         }
 
-        public void GoToMenu(string menu)
+        public void ClickMenu(string name)
         {
-            GetMenuElement(menu).Click();
+            GetMenuElement(name).Click();
         }
 
-        private IWebElement GetMenuElement(string menu)
+        private IWebElement GetMenuElement(string name)
         {
-            return _driver.FindElement(By.XPath($"//ul[contains(@class,'sf-menu')]/li/a[text()='{menu}']"));
+            return _driver.FindElement(By.XPath($"//ul[contains(@class,'sf-menu')]/li/a[text()='{name}']"));
+        }
+
+        public void HoverOverMenu(string name)
+        {
+            Actions action = new Actions(_driver);
+            action.MoveToElement(GetMenuElement(name)).Perform();
+        }
+
+        public void ClickSubmenu(string name)
+        {
+            GetSubmenuElement(name).Click();
+        }
+
+        private IWebElement GetSubmenuElement(string name)
+        {
+            return _driver.FindElement(By.XPath($"//ul[contains(@class,'submenu-container')]/li/a[text()='{name}']"));
+        }
+
+        private IWebElement GetSubmenuCategoryElement(string submenu, string category)
+        {
+            IWebElement submenuElement = GetSubmenuElement(submenu);
+            return submenuElement.FindElement(By.XPath($"//parent::li/ul/li/a[text()='{category}']"));
+        }
+
+        public void ClickSubmenuCategory(string submenu, string category)
+        {
+            GetSubmenuCategoryElement(submenu, category).Click();
         }
     }
 }

@@ -8,11 +8,14 @@ namespace AutomationPractice.SpecFlow.TestData
 {
     public class ScenarioData
     {
+        public class CategoryDto
+        {
+            public string Name;
+            public string[] Subcategories;
+        }
         public string ScenarioName { get; set; }
         public string[] Menus { get; set; }
-        public string[] Categories { get; set; }
-        public string[] Subcategories { get; set; }
-
+        public CategoryDto[] Categories { get; set; }
 
         public static List<ScenarioData> LoadTestDataFromFile()
         {

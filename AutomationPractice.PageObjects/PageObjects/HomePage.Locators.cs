@@ -8,7 +8,6 @@ namespace AutomationPractice.PageObjects.PageObjects
         private IWebElement MyAccountButton => _driver.FindElement(By.ClassName("account"));
         private IWebElement SignOutButton => _driver.FindElement(By.ClassName("logout"));
 
-        private IWebElement PageLabel => _driver.FindElement(By.ClassName("navigation_page"));
         private IWebElement PageBreadcrumbs => _driver.FindElement(By.ClassName("breadcrumb"));
 
     }

@@ -33,10 +33,37 @@ namespace AutomationPractice.SpecFlow.Steps
 
             foreach (var menu in menus)
             {
-                homePage.GoToMenu(menu);
-                Assert.AreEqual(menu, homePage.GetCurrentPageLabel());
-                Assert.AreEqual(menu, categoryPage.GetCategoryPageName());
+                homePage.ClickMenu(menu);
+                VerifyCurrentPageIs(menu);
+                //Assert.AreEqual(menu, homePage.GetCurrentPageLabel());
+                //Assert.AreEqual(menu, categoryPage.GetCategoryPageName());
             }
         }
+
+        private void VerifyCurrentPageIs(string menu)
+        {
+            Assert.AreEqual(menu, homePage.GetCurrentPageLabel());
+            Assert.AreEqual(menu, categoryPage.GetCategoryPageName());
+        }
+
+        [Then(@"I should be able to access the (.*) submenus")]
+        public void ThenIShouldBeAbleToAccessTheSubmenus(string menuName)
+        {
+            var categories = Hooks.scenarioData.Categories;
+            foreach (var category in categories)
+            {
+                homePage.HoverOverMenu(menuName);
+                homePage.ClickSubmenu(category.Name);
+                VerifyCurrentPageIs(category.Name);
+                foreach (var subcategory in category.Subcategories)
+                {
+                    homePage.HoverOverMenu(menuName);
+                    homePage.ClickSubmenuCategory(category.Name, subcategory);
+                    VerifyCurrentPageIs(subcategory);
+                }
+            }
+            
+        }
+
     }
 }

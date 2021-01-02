@@ -4,19 +4,26 @@
       "ScenarioName": "TopMenuNavigation",
       "Menus": [ "Women", "Dresses", "T-shirts" ]
     },
-    //{
-    //  "ScenarioName": "WomenProductsNavigation",
-    //  "Categories": "Tops, Dresses",
-    //  "Tops": "T-shirts, Blouses",
-    //  "Dresses": "Casual Dresses, Evening Dresses, Summer Dresses"
-    //},
+
     {
-      "ScenarioName": "WomenProductsNavigation",
-      "Categories": [ "Tops", "Dresses" ],
-      "Subcategories": {
-        "Tops": [ "T-shirts", "Blouses" ],
-        "Dresses": [ "Casual Dresses", "Evening Dresses", "Summer Dresses" ]
-      }      
+      "ScenarioName": "womenSubmenusNavigation",
+      "Categories": [
+        {
+          "Name": "Tops",
+          "Subcategories": [ "T-shirts", "Blouses" ]
+        },
+        {
+          "Name": "Dresses",
+          "Subcategories": [ "Casual Dresses", "Evening Dresses", "Summer Dresses" ]
+        }
+      ]
+    },
+
+    {
+      "ScenarioName": "buyProducts",
+      "Category": "",
+      "Subcategory": ""
+
     }
   ]
   

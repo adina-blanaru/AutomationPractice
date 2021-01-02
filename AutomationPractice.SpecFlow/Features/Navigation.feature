@@ -8,8 +8,7 @@ Scenario: TopMenuNavigation
 	Given I'm on the Home page
 	Then I should be able to access all the menus
 
-@womenProductsNavigation
+@womenSubmenusNavigation
 Scenario: WomenProductsNavigation
 	Given I'm on the Home page
-	Then I should be able to access the Women categories
-	And I should be able to access the Women subcategories
+	Then I should be able to access the Women submenus
