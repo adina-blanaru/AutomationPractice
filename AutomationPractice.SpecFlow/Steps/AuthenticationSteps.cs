@@ -14,14 +14,12 @@ namespace AutomationPractice.SpecFlow.Steps
 
         private IWebDriver _driver;
         private AuthenticationPage authenticationPage;
-        private HomePage homePage;
         private RegistrationPage registrationPage;
 
         public AuthenticationSteps(IWebDriver driver)
         {
             _driver = driver;
             authenticationPage = new AuthenticationPage(driver);
-            homePage = new HomePage(driver);
             registrationPage = new RegistrationPage(driver);
         }
 
@@ -46,11 +44,5 @@ namespace AutomationPractice.SpecFlow.Steps
             Assert.AreEqual(error, authenticationPage.GetAuthenticationError());
         }
 
-
-        [Then(@"I should see the '(.*)' page")]
-        public void ThenIShouldSeeThePage(string page)
-        {
-            Assert.AreEqual(page, homePage.GetCurrentPageLabel());
-        }
     }
 }

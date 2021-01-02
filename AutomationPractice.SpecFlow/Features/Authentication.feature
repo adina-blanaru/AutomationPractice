@@ -7,6 +7,7 @@
 Scenario: CreateAccount
 	Given I'm on the Authentication page
 	When I create an account
+	#TODO generate random email address, read data from file
 	| Email           | Title | FirstName | LastName | Password  | DateOfBirth | Address    | City   | ZipCode | State  | Country       | MobilePhone | AddressAlias |
 	| adtst0@test.com | Mrs.  | Ad        | Bl       | pass12345 | 11/10/1985  | My address | Brasov | 12345   | Alaska | United States | 6256416516  | Home         |
 	Then I should see the 'My account' page

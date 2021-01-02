@@ -1,0 +1,23 @@
+{
+  "ScenarioDto": [
+    {
+      "ScenarioName": "TopMenuNavigation",
+      "Menus": [ "Women", "Dresses", "T-shirts" ]
+    },
+    //{
+    //  "ScenarioName": "WomenProductsNavigation",
+    //  "Categories": "Tops, Dresses",
+    //  "Tops": "T-shirts, Blouses",
+    //  "Dresses": "Casual Dresses, Evening Dresses, Summer Dresses"
+    //},
+    {
+      "ScenarioName": "WomenProductsNavigation",
+      "Categories": [ "Tops", "Dresses" ],
+      "Subcategories": {
+        "Tops": [ "T-shirts", "Blouses" ],
+        "Dresses": [ "Casual Dresses", "Evening Dresses", "Summer Dresses" ]
+      }      
+    }
+  ]
+  
+}

@@ -61,6 +61,8 @@
     <Compile Include="Dto\UserDataDto.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Actions.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Locators.cs" />
+    <Compile Include="PageObjects\CategoryPage.Actions.cs" />
+    <Compile Include="PageObjects\CategoryPage.Locators.cs" />
     <Compile Include="PageObjects\HomePage.Actions.cs" />
     <Compile Include="PageObjects\HomePage.Locators.cs" />
     <Compile Include="PageObjects\RegistrationPage.Actions.cs" />

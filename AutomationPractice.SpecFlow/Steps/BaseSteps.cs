@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using AutomationPractice.PageObjects.PageObjects;
 using TechTalk.SpecFlow;
-
+using NUnit.Framework;
 
 namespace AutomationPractice.SpecFlow.Steps
 {
@@ -17,12 +17,22 @@ namespace AutomationPractice.SpecFlow.Steps
             homePage = new HomePage(driver);
         }
 
+        [Given(@"I'm on the Home page")]
+        public void GivenIMOnTheHomePage()
+        {
+        }
+
         [Given(@"I'm on the Authentication page")]
         public void GivenImOnTheAuthenticationPage()
         {
             homePage.GoToAuthenticationPage();
         }
 
+        [Then(@"I should see the '(.*)' page")]
+        public void ThenIShouldSeeThePage(string page)
+        {
+            Assert.AreEqual(page, homePage.GetCurrentPageLabel());
+        }
 
     }
 }

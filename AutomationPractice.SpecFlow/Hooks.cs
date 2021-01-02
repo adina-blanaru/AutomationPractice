@@ -1,12 +1,14 @@
-﻿using BoDi;
+﻿using AutomationPractice.SpecFlow.TestData;
+using BoDi;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System;
+using System.Linq;
 using TechTalk.SpecFlow;
 
-namespace TestSpecSelProj
+namespace AutomationPractice.SpecFlow
 {
     public enum BrowserType
     {
@@ -20,7 +22,9 @@ namespace TestSpecSelProj
 
         private readonly IObjectContainer _objectContainer;
         private BrowserType _browserType;
-        public static IWebDriver _driver;
+        public /*static*/ IWebDriver _driver;
+        public static ScenarioData scenarioData;  //TODO can this be handled differently and not be static?
+
         public Hooks(IObjectContainer objectContainer)
         {
             _objectContainer = objectContainer;
@@ -53,6 +57,8 @@ namespace TestSpecSelProj
         {
             CreateDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com");
+            scenarioData = ScenarioData.LoadTestDataFromFile()
+                .First(obj => obj.ScenarioName == TestContext.CurrentContext.Test.MethodName);
         }
 
         [AfterScenario]

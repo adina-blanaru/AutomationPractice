@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 namespace AutomationPractice.PageObjects.PageObjects
 {
@@ -19,7 +20,23 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public string GetCurrentPageLabel()
         {
-            return PageLabel.Text.Trim();
+            string[] breadcrumbs = GetPageBreadcrumbs();
+            return breadcrumbs[breadcrumbs.Length - 1].Trim();
+        }
+
+        public string[] GetPageBreadcrumbs()
+        {
+            return PageBreadcrumbs.Text.Split('>');
+        }
+
+        public void GoToMenu(string menu)
+        {
+            GetMenuElement(menu).Click();
+        }
+
+        private IWebElement GetMenuElement(string menu)
+        {
+            return _driver.FindElement(By.XPath($"//ul[contains(@class,'sf-menu')]/li/a[text()='{menu}']"));
         }
     }
 }
