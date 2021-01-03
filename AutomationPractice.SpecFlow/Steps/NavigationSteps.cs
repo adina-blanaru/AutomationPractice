@@ -1,11 +1,6 @@
 ﻿using AutomationPractice.PageObjects.PageObjects;
-using AutomationPractice.SpecFlow.TestData;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace AutomationPractice.SpecFlow.Steps
@@ -14,7 +9,6 @@ namespace AutomationPractice.SpecFlow.Steps
     public sealed class NavigationSteps
     {
         private IWebDriver _driver;
-
         private CategoryPage categoryPage;
         private HomePage homePage;
 
@@ -35,8 +29,6 @@ namespace AutomationPractice.SpecFlow.Steps
             {
                 homePage.ClickMenu(menu);
                 VerifyCurrentPageIs(menu);
-                //Assert.AreEqual(menu, homePage.GetCurrentPageLabel());
-                //Assert.AreEqual(menu, categoryPage.GetCategoryPageName());
             }
         }
 
@@ -52,8 +44,7 @@ namespace AutomationPractice.SpecFlow.Steps
             var categories = Hooks.scenarioData.Categories;
             foreach (var category in categories)
             {
-                homePage.HoverOverMenu(menuName);
-                homePage.ClickSubmenu(category.Name);
+                GoToSubmenuInMenu(category.Name, menuName);
                 VerifyCurrentPageIs(category.Name);
                 foreach (var subcategory in category.Subcategories)
                 {
@@ -61,8 +52,20 @@ namespace AutomationPractice.SpecFlow.Steps
                     homePage.ClickSubmenuCategory(category.Name, subcategory);
                     VerifyCurrentPageIs(subcategory);
                 }
-            }
-            
+            }            
+        }
+
+        private void GoToSubmenuInMenu(string submenu, string menu)
+        {
+            homePage.HoverOverMenu(menu);
+            homePage.ClickSubmenu(submenu);
+        }
+
+        [Given(@"I'm on the '(.*)' '(.*)' category in '(.*)' view")]
+        public void GivenIAmOnCategoryPageWithView(string menu, string category, string viewMode)
+        {
+            GoToSubmenuInMenu(category, menu);
+            categoryPage.SetViewMode(viewMode);
         }
 
     }

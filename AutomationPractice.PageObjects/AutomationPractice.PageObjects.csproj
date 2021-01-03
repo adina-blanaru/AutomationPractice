@@ -59,6 +59,10 @@
   <ItemGroup>
     <Compile Include="Dto\UserCredentialsDto.cs" />
     <Compile Include="Dto\UserDataDto.cs" />
+    <Compile Include="PageObjects\WishlistsPage.Locators.cs" />
+    <Compile Include="PageObjects\WishlistsPage.Actions.cs" />
+    <Compile Include="PageObjects\AccountPage.Locators.cs" />
+    <Compile Include="PageObjects\AccountPage.Actions.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Actions.cs" />
     <Compile Include="PageObjects\AuthenticationPage.Locators.cs" />
     <Compile Include="PageObjects\CategoryPage.Actions.cs" />

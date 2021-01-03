@@ -17,6 +17,11 @@ namespace AutomationPractice.PageObjects.PageObjects
             SignInButton.Click();
         }
 
+        public void GoToMyAccountPage()
+        {
+            MyAccountButton.Click();
+        }
+
         public string GetCurrentPageLabel()
         {
             string[] breadcrumbs = GetPageBreadcrumbs();
