@@ -14,12 +14,14 @@ namespace AutomationPractice.SpecFlow.Steps
 
         private IWebDriver _driver;
         private AuthenticationPage authenticationPage;
+        private HomePage homePage;
         private RegistrationPage registrationPage;
 
         public AuthenticationSteps(IWebDriver driver)
         {
             _driver = driver;
             authenticationPage = new AuthenticationPage(driver);
+            homePage = new HomePage(driver);
             registrationPage = new RegistrationPage(driver);
         }
 
@@ -44,5 +46,12 @@ namespace AutomationPractice.SpecFlow.Steps
             Assert.AreEqual(error, authenticationPage.GetAuthenticationError());
         }
 
+        [Given(@"I'm logged into the site")]
+        public void GivenIMLoggedIntoTheSite(Table table)
+        {
+            homePage.GoToAuthenticationPage();
+            var userCredentials = table.CreateInstance<UserCredetialsDto>();
+            authenticationPage.LoginWithCredentials(userCredentials);
+        }
     }
 }

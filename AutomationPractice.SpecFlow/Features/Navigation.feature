@@ -9,6 +9,6 @@ Scenario: TopMenuNavigation
 	Then I should be able to access all the menus
 
 @womenSubmenusNavigation
-Scenario: WomenProductsNavigation
+Scenario: WomenSubmenusNavigation
 	Given I'm on the Home page
 	Then I should be able to access the Women submenus

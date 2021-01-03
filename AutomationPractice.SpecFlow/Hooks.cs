@@ -57,8 +57,12 @@ namespace AutomationPractice.SpecFlow
         {
             CreateDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com");
-            scenarioData = ScenarioData.LoadTestDataFromFile()
-                .First(obj => obj.ScenarioName == TestContext.CurrentContext.Test.MethodName);
+            try
+            {
+                scenarioData = ScenarioData.LoadTestDataFromFile()
+                    .First(obj => obj.ScenarioName == TestContext.CurrentContext.Test.MethodName);
+            }
+            catch { }
         }
 
         [AfterScenario]
