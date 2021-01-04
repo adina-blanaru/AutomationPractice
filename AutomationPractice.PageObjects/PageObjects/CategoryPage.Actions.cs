@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Threading;
 
 namespace AutomationPractice.PageObjects.PageObjects
 {
@@ -40,6 +41,13 @@ namespace AutomationPractice.PageObjects.PageObjects
             GetProductAddButtonElement(product, addButton).Click();
         }
 
+        public void AddToCompareByProductIndex(int index)
+        {
+            BasePage.HoverOver(_driver, Products[index].Container);
+            Products[index].AddToCompareButton.Click();
+            Thread.Sleep(500);
+        }
+
         public string GetAlertMessage()
         {
             return AlertMessageBox.Text;
@@ -48,6 +56,22 @@ namespace AutomationPractice.PageObjects.PageObjects
         public void CloseAlertMessageBox()
         {
             AlertMessageCloseIcon.Click();
+        }
+
+        public void ClickCompareButton()
+        {
+            CompareButton.Click();
+        }
+
+        public bool IsAddToCompareCheckedForProduct(string product)
+        {
+            var addToCompareButton = GetProductAddButtonElement(product, "compare");
+            return addToCompareButton.GetAttribute("class").Contains("checked");
+        }
+
+        public int GetCompareCount()
+        {
+            return int.Parse(CompareButtonCount.Text);
         }
     }
 }
