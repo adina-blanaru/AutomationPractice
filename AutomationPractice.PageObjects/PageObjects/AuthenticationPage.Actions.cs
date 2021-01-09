@@ -11,7 +11,15 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public void CreateAccount(string email)
         {
-            NewEmailAdressTextBox.SendKeys(email);
+            if (email.Equals("NewUniqueEmail"))
+            {              
+                string NewUniqueEmail = $"AD_{BasePage.GetCurrentTimestamp()}@test.com";
+                NewEmailAdressTextBox.SendKeys(NewUniqueEmail);
+            }
+            else
+            {
+                NewEmailAdressTextBox.SendKeys(email);
+            }
             CreateAccountButton.Click();
         }
 

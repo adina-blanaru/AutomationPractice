@@ -68,5 +68,10 @@ namespace AutomationPractice.SpecFlow.Steps
             categoryPage.SetViewMode(viewMode);
         }
 
+        [Given(@"I'm on the '(.*)' menu")]
+        public void GivenIMOnMenu(string menu)
+        {
+            homePage.ClickMenu(menu);
+        }
     }
 }
