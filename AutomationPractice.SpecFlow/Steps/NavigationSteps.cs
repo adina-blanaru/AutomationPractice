@@ -73,5 +73,14 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             homePage.ClickMenu(menu);
         }
+
+        [Given(@"I open a random product from '(.*)' menu")]
+        public void GivenIOpenRandomProductFromMenu(string menu)
+        {
+            homePage.ClickMenu(menu);
+            var index = BasePage.GetRandomNumberBetween(0, categoryPage.ProductContainerList.Count - 1);
+            categoryPage.OpenProductByIndex(index);
+        }
+
     }
 }

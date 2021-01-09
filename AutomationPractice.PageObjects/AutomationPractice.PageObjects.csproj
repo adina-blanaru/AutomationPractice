@@ -58,8 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\UserCredentialsDto.cs" />
+    <Compile Include="Dto\ProductDataDto.cs" />
     <Compile Include="Dto\UserDataDto.cs" />
     <Compile Include="PageObjects\ComparePage.Actions.cs" />
+    <Compile Include="PageObjects\ProductPage.Actions.cs" />
+    <Compile Include="PageObjects\ProductPage.Locators.cs" />
     <Compile Include="PageObjects\WishlistsPage.Locators.cs" />
     <Compile Include="PageObjects\WishlistsPage.Actions.cs" />
     <Compile Include="PageObjects\AccountPage.Locators.cs" />

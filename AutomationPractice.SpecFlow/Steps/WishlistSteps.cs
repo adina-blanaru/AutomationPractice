@@ -1,8 +1,8 @@
-﻿using AutomationPractice.PageObjects.PageObjects;
+﻿using AutomationPractice.PageObjects.Dto;
+using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 
 namespace AutomationPractice.SpecFlow.Steps
 {
@@ -13,6 +13,7 @@ namespace AutomationPractice.SpecFlow.Steps
         private AccountPage accountPage;
         private CategoryPage categoryPage;
         private HomePage homePage;
+        private ProductPage productPage;
         private WishlistsPage wishlistsPage;
 
         public WishlistSteps(IWebDriver driver)
@@ -21,6 +22,7 @@ namespace AutomationPractice.SpecFlow.Steps
             accountPage = new AccountPage(driver);    
             categoryPage = new CategoryPage(driver);
             homePage = new HomePage(driver);
+            productPage = new ProductPage(driver);
             wishlistsPage = new WishlistsPage(driver);
         }
 
@@ -38,14 +40,18 @@ namespace AutomationPractice.SpecFlow.Steps
         [Then(@"I (should|shouldn't) see the '(.*)' product in my wishlist")]
         public void ThenIShouldSeeTheProductInMyWishlist(string exist, string product)
         {
-            homePage.GoToMyAccountPage();
-            accountPage.GoToWishlists();
-            wishlistsPage.OpenFirstWishlist();
-
+            GoToFirstWishlist();
             if (exist.Equals("should"))
                 Assert.IsTrue(wishlistsPage.ProductExistsInWishlist(product));
             else
                 Assert.IsFalse(wishlistsPage.ProductExistsInWishlist(product));
+        }
+
+        public void GoToFirstWishlist()
+        {
+            homePage.GoToMyAccountPage();
+            accountPage.GoToWishlists();
+            wishlistsPage.OpenFirstWishlist();
         }
 
         [When(@"I remove the '(.*)' product from the wishlist")]
@@ -53,5 +59,31 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             wishlistsPage.RemoveProductFromWishlist(product);
         }
+
+        [When(@"I add the product to whishlist")]
+        public void WhenIAddTheProductToWhishlist()
+        {
+            var product = new ProductDataDto
+            {
+                Name = productPage.GetProductName(),
+                Quantity = productPage.SelectRandomQuantity(1, 5),
+                Size = productPage.SelectRandomSize(),
+                Color = productPage.SelectRandomColor()
+            };
+            ProductPage.MyProducts.Add(product);
+            productPage.AddToWishlist();
+        }
+
+        [Then(@"I should see the correct product in my wishlist")]
+        public void ThenIShouldSeeTheCorrectProductInMyWishlist()
+        {
+            GoToFirstWishlist();
+            var product = ProductPage.MyProducts[0];
+            Assert.IsTrue(wishlistsPage.ProductExistsInWishlist(product.Name));
+            Assert.AreEqual(product.Size, wishlistsPage.GetProductSize(product.Name));
+            Assert.AreEqual(product.Color, wishlistsPage.GetProductColor(product.Name));
+            Assert.AreEqual(product.Quantity, wishlistsPage.GetProductQuantity(product.Name));
+        }
+
     }
 }

@@ -17,3 +17,12 @@ Scenario: AddRemoveProductInWishlist
 	| Category | View | Product               |
 	| Dresses  | Grid | Printed Chiffon Dress |
 	| Tops     | List | Blouse                |
+
+@addToWishlistFromProductPage
+Scenario: AddToWishlistFromProductPage
+	Given I'm logged into the site
+	| Email          | Password  |
+	| adtst@test.com | pass12345 |
+	And I open a random product from 'Women' menu
+	When I add the product to whishlist
+	Then I should see the correct product in my wishlist	

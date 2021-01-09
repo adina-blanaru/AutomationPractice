@@ -1,9 +1,9 @@
-﻿using AutomationPractice.PageObjects.PageObjects;
+﻿using AutomationPractice.PageObjects.Dto;
+using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Threading;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 
 namespace AutomationPractice.SpecFlow.Steps
 {
@@ -39,7 +39,7 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             var initialCompareCount = categoryPage.GetCompareCount();
             categoryPage.AddProductTo(product, "compare");
-            Thread.Sleep(1000);
+            Thread.Sleep(1000); //TODO find another way to wait until product in added to comparison
             Assert.IsFalse(categoryPage.IsAddToCompareCheckedForProduct(product));
             var finalCompareCount = categoryPage.GetCompareCount();
             Assert.AreEqual(initialCompareCount - 1, finalCompareCount);
@@ -49,9 +49,12 @@ namespace AutomationPractice.SpecFlow.Steps
         [When(@"I add to compare the first '(\d+)' products")]
         public void WhenIAddToCompareProducts(int count)
         {
-            CategoryPage.Products = categoryPage.GetProductDetailsList();
             for (var i = 0; i < count; i++)
+            {
+                var product = new ProductDataDto { Name = categoryPage.GetProductName(i) };
+                ProductPage.MyProducts.Add(product);
                 categoryPage.AddToCompareByProductIndex(i);
+            }
         }
 
         [Then(@"I (should|shouldn't) see the '(\d+)' products in the comparison page")]
@@ -63,12 +66,12 @@ namespace AutomationPractice.SpecFlow.Steps
             if (exist.Equals("should"))
             {
                 for (var i = 0; i < count; i++)
-                    Assert.IsTrue(comparePage.ProductExistsInComparison(CategoryPage.Products[i].Name));
+                    Assert.IsTrue(comparePage.ProductExistsInComparison(ProductPage.MyProducts[i].Name));
             }
             else
             {
                 for (var i = 0; i < count; i++)
-                    Assert.IsFalse(comparePage.ProductExistsInComparison(CategoryPage.Products[i].Name));
+                    Assert.IsFalse(comparePage.ProductExistsInComparison(ProductPage.MyProducts[i].Name));
             }
         }
 
@@ -76,7 +79,7 @@ namespace AutomationPractice.SpecFlow.Steps
         public void WhenIRemoveTheFirstProductsFromTheCompareList(int count)
         {
             for (var i = 0; i < count; i++)
-                comparePage.RemoveProductFromComparison(CategoryPage.Products[i].Name);
+                comparePage.RemoveProductFromComparison(ProductPage.MyProducts[i].Name);
         }
     }
 }

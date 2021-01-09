@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using System;
 
 namespace AutomationPractice.PageObjects.PageObjects
 {
@@ -13,7 +14,13 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public static string GetCurrentTimestamp()
         {
-            return System.DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss");
+            return DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss");
+        }
+
+        public static int GetRandomNumberBetween(int min, int max)
+        {
+            var random = new Random();
+            return random.Next(min, max);
         }
     }
 }

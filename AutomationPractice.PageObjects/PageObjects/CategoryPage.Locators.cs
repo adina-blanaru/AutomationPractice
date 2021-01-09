@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AutomationPractice.PageObjects.Dto;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 
@@ -6,15 +7,7 @@ namespace AutomationPractice.PageObjects.PageObjects
 {
     partial class CategoryPage
     {
-        public class ProductDetails
-        {
-            public IWebElement Container;
-            public string Name;
-            public IWebElement AddToCompareButton;
-        }
-
-        public static List<ProductDetails> Products;
-        private IList<IWebElement> ProductContainerList => _driver.FindElements(By.ClassName("product-container"));
+        public IList<IWebElement> ProductContainerList => _driver.FindElements(By.ClassName("product-container"));
         private IWebElement CategoryPageName => _driver.FindElement(By.ClassName("category-name"));
         private IWebElement GridViewButton => _driver.FindElement(By.Id("grid"));
         private IWebElement ListViewButton => _driver.FindElement(By.Id("list"));
@@ -28,41 +21,34 @@ namespace AutomationPractice.PageObjects.PageObjects
             return _driver.FindElement(By.XPath($"//h5[@itemprop='name']/a[@title='{productName}']/ancestor::div[@class='product-container']"));
         }
 
-        private IWebElement GetProductAddButtonElement(string productName, string addButton)
+        private IWebElement GetAddButtonElement(string productName, string addButton)
         {
-            string buttonClassName;
+            var productContainer = GetProductContainerElement(productName);
+            return productContainer.FindElement(By.ClassName(GetClassNameForAddButton(addButton)));
+        }
+        private IWebElement GetAddButtonElement(int index, string addButton)
+        {
+            return ProductContainerList[index].FindElement(By.ClassName(GetClassNameForAddButton(addButton)));
+        }
+
+        private string GetClassNameForAddButton(string addButton)
+        {
             switch (addButton)
             {
                 case "cart":
-                    buttonClassName = "ajax_add_to_cart_button";
-                    break;
+                    return "ajax_add_to_cart_button";
                 case "wishlist":
-                    buttonClassName = "addToWishlist";
-                    break;
+                    return "addToWishlist";
                 case "compare":
-                    buttonClassName = "add_to_compare";
-                    break;
+                    return "add_to_compare";
                 default:
                     throw new InvalidOperationException($"Unexpected value: {addButton}");
             }
-            var productContainer = GetProductContainerElement(productName);
-            return productContainer.FindElement(By.ClassName(buttonClassName));
         }
 
-        public List<ProductDetails> GetProductDetailsList()
+        public string GetProductName(int index)
         {
-            var products = new List<ProductDetails>();
-            foreach (var container in ProductContainerList)
-            {
-                var productDetails = new ProductDetails()
-                {
-                    Container = container,
-                    Name = container.FindElement(By.ClassName("product-name")).Text.Trim(),
-                    AddToCompareButton = container.FindElement(By.ClassName("add_to_compare"))
-                };
-                products.Add(productDetails);
-            }
-            return products;
+            return ProductContainerList[index].FindElement(By.ClassName("product-name")).Text.Trim();
         }
     }
 }

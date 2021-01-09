@@ -14,7 +14,7 @@ Scenario: AddRemoveProductToCompare
 	| Tops     | List | Blouse                |
 
 @compareProductsAndRemove
-Scenario: CompareProducts
+Scenario: CompareProductsAndRemove
 	Given I'm on the 'Women' menu
 	When I add to compare the first '3' products
 	Then I should see the '3' products in the comparison page

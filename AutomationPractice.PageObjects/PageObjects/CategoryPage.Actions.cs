@@ -38,14 +38,14 @@ namespace AutomationPractice.PageObjects.PageObjects
         public void AddProductTo(string product, string addButton)
         {
             BasePage.HoverOver(_driver, GetProductContainerElement(product));
-            GetProductAddButtonElement(product, addButton).Click();
+            GetAddButtonElement(product, addButton).Click();
         }
 
         public void AddToCompareByProductIndex(int index)
         {
-            BasePage.HoverOver(_driver, Products[index].Container);
-            Products[index].AddToCompareButton.Click();
-            Thread.Sleep(500);
+            BasePage.HoverOver(_driver, ProductContainerList[index]);
+            GetAddButtonElement(index, "compare").Click();
+            Thread.Sleep(500);  //TODO find another way to wait until product in added to comparison
         }
 
         public string GetAlertMessage()
@@ -65,13 +65,19 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public bool IsAddToCompareCheckedForProduct(string product)
         {
-            var addToCompareButton = GetProductAddButtonElement(product, "compare");
+            var addToCompareButton = GetAddButtonElement(product, "compare");
             return addToCompareButton.GetAttribute("class").Contains("checked");
         }
 
         public int GetCompareCount()
         {
             return int.Parse(CompareButtonCount.Text);
+        }
+
+        public void OpenProductByIndex(int index)
+        {
+            BasePage.HoverOver(_driver, ProductContainerList[index]);
+            ProductContainerList[index].FindElement(By.ClassName("product-name")).Click();
         }
     }
 }
