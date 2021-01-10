@@ -17,6 +17,11 @@ namespace AutomationPractice.PageObjects.PageObjects
             return DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss");
         }
 
+        public static string GetCurrentDate(string format)
+        {
+            return DateTime.Now.ToString(format);
+        }
+
         public static int GetRandomNumberBetween(int min, int max)
         {
             var random = new Random();

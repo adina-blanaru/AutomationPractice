@@ -65,6 +65,8 @@
     <Compile Include="PageObjects\CartPage.Locators.cs" />
     <Compile Include="PageObjects\CartConfirmationPage.Locators.cs" />
     <Compile Include="PageObjects\ComparePage.Actions.cs" />
+    <Compile Include="PageObjects\OrderHistoryPage.Actions.cs" />
+    <Compile Include="PageObjects\OrderHistoryPage.Locators.cs" />
     <Compile Include="PageObjects\ProductPage.Actions.cs" />
     <Compile Include="PageObjects\ProductPage.Locators.cs" />
     <Compile Include="PageObjects\WishlistsPage.Locators.cs" />

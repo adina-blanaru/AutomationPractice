@@ -73,7 +73,8 @@ namespace AutomationPractice.SpecFlow.Steps
             cartConfirmationPage.ContinueShoppingButton.Click();
         }
 
-        [Given(@"I add to my cart '(\d+)' random products from '(.*)' menu")]
+        [Given(@"I add to my cart '(\d+)' random product(?:s?) from '(.*)' menu")]
+        [When(@"I add to my cart '(\d+)' random product(?:s?) from '(.*)' menu")]
         public void GivenIAddToMyCartRandomProductsFromMenu(int count, string menu)
         {
             for (var i = 0; i < count; i++)

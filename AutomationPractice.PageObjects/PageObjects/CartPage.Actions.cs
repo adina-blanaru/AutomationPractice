@@ -72,5 +72,34 @@ namespace AutomationPractice.PageObjects.PageObjects
         {            
             return BasePage.CurrencyToDouble(TotalProducts.Text);
         }
+
+        public void SubmitSummaryStep()
+        {
+            ProceedToCheckoutButton.Click();
+        }
+
+        public void SubmitAddressStep()
+        {
+            ProceedToCheckoutButton.Click();
+        }
+
+        public void SubmitShippingStep()
+        {
+            TermsOfServiceCheckbox.Click();
+            ProceedToCheckoutButton.Click();
+        }
+
+        public void SubmitPaymentStep(string paymentType)
+        {
+            if (paymentType.Equals("wire"))
+                PayByBankWireButton.Click();
+            else if (paymentType.Equals("check"))
+                PayByCheckButton.Click();                
+        }
+
+        public void ConfirmOrder()
+        {
+            ConfirmOrderButton.Click();
+        }
     }
 }

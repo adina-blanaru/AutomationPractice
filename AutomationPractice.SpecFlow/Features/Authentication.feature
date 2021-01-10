@@ -16,9 +16,7 @@ Scenario: CreateAccount
 @validLogin
 Scenario: ValidLogin
 	Given I'm on the Authentication page
-	When I login with credentials
-	| Email          | Password  |
-	| adtst@test.com | pass12345 |
+	When I sign in as 'Adina'
 	Then I should see the 'My account' page
 
 

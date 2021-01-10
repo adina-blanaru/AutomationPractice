@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using AutomationPractice.PageObjects.Dto;
 using AutomationPractice.PageObjects.PageObjects;
-
+using System;
 
 namespace AutomationPractice.SpecFlow.Steps
 {
@@ -51,6 +51,29 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             homePage.GoToAuthenticationPage();
             var userCredentials = table.CreateInstance<UserCredetialsDto>();
+            authenticationPage.LoginWithCredentials(userCredentials);
+        }
+
+        [Given(@"I'm logged in as '(.*)'")]
+        [When(@"I sign in as '(.*)'")]
+        public void GivenIMLoggedIn(string user)
+        {
+            try
+            {
+                if (homePage.GetCurrentPageLabel() != "Authentication")
+                    homePage.GoToAuthenticationPage();
+            }
+            catch (Exception) 
+            {
+                homePage.GoToAuthenticationPage();
+            }
+
+            var userCredentials = new UserCredetialsDto
+            {
+                //TODO read from file
+                Email = "adtst@test.com",
+                Password = "pass12345" 
+            };
             authenticationPage.LoginWithCredentials(userCredentials);
         }
     }
