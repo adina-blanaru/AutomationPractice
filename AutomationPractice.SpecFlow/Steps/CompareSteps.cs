@@ -75,7 +75,7 @@ namespace AutomationPractice.SpecFlow.Steps
             }
         }
 
-        [When(@"I remove the first (.*) products from the compare list")]
+        [When(@"I remove the first '(\d+)' products from the compare list")]
         public void WhenIRemoveTheFirstProductsFromTheCompareList(int count)
         {
             for (var i = 0; i < count; i++)

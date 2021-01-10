@@ -18,5 +18,5 @@ Scenario: CompareProductsAndRemove
 	Given I'm on the 'Women' menu
 	When I add to compare the first '3' products
 	Then I should see the '3' products in the comparison page
-	When I remove the first 2 products from the compare list
+	When I remove the first '2' products from the compare list
 	Then I shouldn't see the '2' products in the comparison page

@@ -22,5 +22,11 @@ namespace AutomationPractice.PageObjects.PageObjects
             var random = new Random();
             return random.Next(min, max);
         }
+
+        public static double CurrencyToDouble(string value)
+        {
+            //converts "$28.98" to 28.98
+            return double.Parse(value.Substring(1));
+        }
     }
 }

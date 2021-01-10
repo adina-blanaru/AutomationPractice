@@ -17,13 +17,6 @@
           "Subcategories": [ "Casual Dresses", "Evening Dresses", "Summer Dresses" ]
         }
       ]
-    },
-
-    {
-      "ScenarioName": "buyProducts",
-      "Category": "",
-      "Subcategory": ""
-
     }
   ]
   

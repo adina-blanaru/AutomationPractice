@@ -22,6 +22,11 @@ namespace AutomationPractice.PageObjects.PageObjects
             MyAccountButton.Click();
         }
 
+        public void GoToMyCartPage()
+        {
+            CartButton.Click();
+        }
+
         public string GetCurrentPageLabel()
         {
             string[] breadcrumbs = GetPageBreadcrumbs();

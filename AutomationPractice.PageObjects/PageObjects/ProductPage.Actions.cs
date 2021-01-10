@@ -10,7 +10,12 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public string GetProductName()
         {
-            return ProductName.Text.Trim();
+            return ProductName.Text;
+        }
+
+        public double GetProductPrice()
+        {
+            return BasePage.CurrencyToDouble(ProductPrice.Text);
         }
 
         public void AddToWishlist()

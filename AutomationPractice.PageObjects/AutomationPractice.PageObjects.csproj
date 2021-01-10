@@ -60,6 +60,10 @@
     <Compile Include="Dto\UserCredentialsDto.cs" />
     <Compile Include="Dto\ProductDataDto.cs" />
     <Compile Include="Dto\UserDataDto.cs" />
+    <Compile Include="PageObjects\CartPage.Actions.cs" />
+    <Compile Include="PageObjects\CartConfirmationPage.Actions.cs" />
+    <Compile Include="PageObjects\CartPage.Locators.cs" />
+    <Compile Include="PageObjects\CartConfirmationPage.Locators.cs" />
     <Compile Include="PageObjects\ComparePage.Actions.cs" />
     <Compile Include="PageObjects\ProductPage.Actions.cs" />
     <Compile Include="PageObjects\ProductPage.Locators.cs" />

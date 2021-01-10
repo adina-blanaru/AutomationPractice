@@ -79,5 +79,17 @@ namespace AutomationPractice.PageObjects.PageObjects
             BasePage.HoverOver(_driver, ProductContainerList[index]);
             ProductContainerList[index].FindElement(By.ClassName("product-name")).Click();
         }
+
+        public void AddToCartByProductIndex(int index)
+        {
+            BasePage.HoverOver(_driver, ProductContainerList[index]);
+            GetAddButtonElement(index, "cart").Click();
+        }
+
+        public double GetPriceByProductIndex(int index)
+        {
+            var price = ProductContainerList[index].FindElement(By.CssSelector(".right-block .price")).Text;
+            return BasePage.CurrencyToDouble(price);
+        }
     }
 }

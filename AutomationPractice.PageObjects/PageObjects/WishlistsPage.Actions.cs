@@ -24,11 +24,6 @@ namespace AutomationPractice.PageObjects.PageObjects
         public bool ProductExistsInWishlist(string product)
         {
             return _driver.FindElements(By.XPath($"//p[@id='s_title'][contains(text(),'{product}')]")).Count > 0;
-
-            //var products = _driver.FindElements(By.XPath($"//p[@id='s_title'][contains(text(),'{product}')]"));
-            //if (products.Count > 0)
-            //    BasePage.HoverOver(_driver, products[0]);
-            //return products.Count > 0;
         }
 
         public void RemoveProductFromWishlist(string product)
@@ -50,6 +45,7 @@ namespace AutomationPractice.PageObjects.PageObjects
             var details = GetProductContainer(product).FindElement(By.CssSelector("#s_title [title='Product detail']")).Text;
             return details.Split(',');
         }
+
         public string GetProductColor(string product)
         {
             return GetProductSizeColorDetails(product)[1].Trim();
