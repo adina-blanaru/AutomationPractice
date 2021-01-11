@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace AutomationPractice.SpecFlow.TestData
 {
@@ -19,8 +20,9 @@ namespace AutomationPractice.SpecFlow.TestData
 
         public static List<ScenarioData> LoadTestDataFromFile()
         {
-            //var myFile = $"{Environment.CurrentDirectory}\\TestData\\MyTestDataJson.json";
-            var myFile = @"C:\Users\Adina\Projects\AgileHub_Testare_Automatizata\Adina Final Projects\AutomationPractice\AutomationPractice.SpecFlow\TestData\TestDataJson.json";
+            //var myFile = @"C:\Users\Adina\Projects\AgileHub_Testare_Automatizata\Adina Final Projects\AutomationPractice\AutomationPractice.SpecFlow\TestData\TestDataJson.json";
+            var TestDataFolderPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location).Replace("bin\\Debug\\net48", "TestData");
+            var myFile = $@"{TestDataFolderPath}\TestDataJson.json";
 
             try
             {

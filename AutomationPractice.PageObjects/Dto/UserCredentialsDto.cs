@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace AutomationPractice.PageObjects.Dto
 {
@@ -15,8 +16,9 @@ namespace AutomationPractice.PageObjects.Dto
 
         public static List<UserCredetialsDto> GetUserCredentialsList()
         {
-            //var myFile = $"{Environment.CurrentDirectory}\\TestData\\MyTestDataJson.json";
-            var myFile = @"C:\Users\Adina\Projects\AgileHub_Testare_Automatizata\Adina Final Projects\AutomationPractice\AutomationPractice.SpecFlow\TestData\UserCredentials.json";
+            //var myFile = @"C:\Users\Adina\Projects\AgileHub_Testare_Automatizata\Adina Final Projects\AutomationPractice\AutomationPractice.SpecFlow\TestData\UserCredentials.json";
+            var TestDataFolderPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location).Replace("bin\\Debug\\net48", "TestData");
+            var myFile = $@"{TestDataFolderPath}\UserCredentials.json";
 
             try
             {
