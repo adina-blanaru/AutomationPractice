@@ -56,7 +56,7 @@ namespace AutomationPractice.SpecFlow.Steps
 
         [Given(@"I'm logged in as '(.*)'")]
         [When(@"I sign in as '(.*)'")]
-        public void GivenIMLoggedIn(string user)
+        public void GivenIMLoggedIn(string alias)
         {
             try
             {
@@ -68,13 +68,8 @@ namespace AutomationPractice.SpecFlow.Steps
                 homePage.GoToAuthenticationPage();
             }
 
-            var userCredentials = new UserCredetialsDto
-            {
-                //TODO read from file
-                Email = "adtst@test.com",
-                Password = "pass12345" 
-            };
-            authenticationPage.LoginWithCredentials(userCredentials);
+            UserCredetialsDto credentials = UserCredetialsDto.GetUserCredetials(alias);
+            authenticationPage.LoginWithCredentials(credentials);
         }
     }
 }

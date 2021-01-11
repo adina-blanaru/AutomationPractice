@@ -29,16 +29,13 @@ namespace AutomationPractice.SpecFlow.TestData
                     var json = reader.ReadToEnd();
                     var config = JObject.Parse(json).SelectToken("ScenarioDto").ToString();
                     var testDataList = JsonConvert.DeserializeObject<List<ScenarioData>>(config);
-
                     return testDataList;
                 }
-
             }
             catch (Exception)
             {
                 throw new Exception($"There's a problem with file {myFile}");
             }
-
         }
 
     }
