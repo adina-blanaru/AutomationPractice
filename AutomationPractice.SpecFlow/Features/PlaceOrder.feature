@@ -13,8 +13,7 @@ Scenario: PlaceOrderAsGuest
 
 @placeOrderAsUser
 Scenario: PlaceOrderAsUser
-	Given I'm logged in as 'Adina'
+	Given I'm logged in as 'Adina_new'
 	When I add to my cart '2' random products from 'Women' menu
 	And I place the order
 	Then I should see the new order with the correct data
-	#TODO check order details

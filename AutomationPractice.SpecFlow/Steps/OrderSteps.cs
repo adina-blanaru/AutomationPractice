@@ -1,5 +1,4 @@
-﻿using AutomationPractice.PageObjects.Dto;
-using AutomationPractice.PageObjects.PageObjects;
+﻿using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
@@ -10,19 +9,13 @@ namespace AutomationPractice.SpecFlow.Steps
     public sealed class OrderSteps
     {
         private IWebDriver _driver;
-        private CartConfirmationPage cartConfirmationPage;
         private CartPage cartPage;
-        private CategoryPage categoryPage;
-        private HomePage homePage;
         private OrderHistoryPage orderHistoryPage;
 
         public OrderSteps(IWebDriver driver)
         {
             _driver = driver;
-            cartConfirmationPage = new CartConfirmationPage(driver);
             cartPage = new CartPage(driver);
-            categoryPage = new CategoryPage(driver);
-            homePage = new HomePage(driver);
             orderHistoryPage = new OrderHistoryPage(driver);
         }
 
@@ -43,8 +36,20 @@ namespace AutomationPractice.SpecFlow.Steps
             orderHistoryPage.OpenOrderByPosition(1);
             Assert.AreEqual(BasePage.GetCurrentDate("MM/dd/yyyy"), orderHistoryPage.GetOrderDate(1));
             //TODO check products details - name, color, size, qty, price
-        }
 
+            var expectedTotalProductsPrice = 0.00;
+            foreach (var product in ProductPage.MyProducts)
+            {
+                Assert.IsTrue(orderHistoryPage.ProductExistsInOrder(product.Name));
+                Assert.AreEqual(product.Size, orderHistoryPage.GetProductSize(product.Name));
+                Assert.AreEqual(product.Color, orderHistoryPage.GetProductColor(product.Name));
+                Assert.AreEqual(product.Quantity, orderHistoryPage.GetProductQuantity(product.Name));
+                Assert.AreEqual(product.Price, orderHistoryPage.GetProductPrice(product.Name));
+                Assert.AreEqual(product.Quantity * product.Price, orderHistoryPage.GetProductTotal(product.Name));
+                expectedTotalProductsPrice += product.Quantity * product.Price;
+            }
+            Assert.AreEqual(expectedTotalProductsPrice, orderHistoryPage.GetTotalProductsPrice());
+        }
 
         [When(@"I proceed to checkout from the Summary step")]
         public void WhenIProceedToCheckout()
