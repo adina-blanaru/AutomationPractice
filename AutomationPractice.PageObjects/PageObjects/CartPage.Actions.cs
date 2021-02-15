@@ -17,7 +17,7 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public bool ProductExistsInCart(string product)
         {
-            return _driver.FindElements(By.XPath($"//table[@id='cart_summary']//a[contains(text(),'{product}')]")).Count > 0;
+            return _driver.FindElements(By.XPath($"//table[@id='cart_summary']//p/a[contains(text(),'{product}')]")).Count > 0;
         }
 
         public void RemoveProductFromCart(string product)

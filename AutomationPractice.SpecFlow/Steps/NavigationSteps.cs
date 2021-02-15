@@ -78,9 +78,22 @@ namespace AutomationPractice.SpecFlow.Steps
         public void GivenIOpenRandomProductFromMenu(string menu)
         {
             homePage.ClickMenu(menu);
-            var index = BasePage.GetRandomNumberBetween(0, categoryPage.ProductContainerList.Count - 1);
+            int index;
+            do
+            {
+                index = BasePage.GetRandomNumberBetween(0, categoryPage.ProductContainerList.Count - 1);
+            }
+            while (ProductNameExistsInMyProducts(categoryPage.GetProductName(index)) == true);
+
             categoryPage.OpenProductByIndex(index);
         }
 
+        private bool ProductNameExistsInMyProducts(string productName)
+        {
+            foreach (var product in ProductPage.MyProducts)
+                if (productName == product.Name)            
+                    return true;
+            return false;
+        }
     }
 }

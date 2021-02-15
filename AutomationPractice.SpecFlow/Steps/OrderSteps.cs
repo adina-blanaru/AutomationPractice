@@ -1,6 +1,7 @@
 ﻿using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace AutomationPractice.SpecFlow.Steps
@@ -35,7 +36,6 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             orderHistoryPage.OpenOrderByPosition(1);
             Assert.AreEqual(BasePage.GetCurrentDate("MM/dd/yyyy"), orderHistoryPage.GetOrderDate(1));
-            //TODO check products details - name, color, size, qty, price
 
             var expectedTotalProductsPrice = 0.00;
             foreach (var product in ProductPage.MyProducts)
@@ -48,7 +48,7 @@ namespace AutomationPractice.SpecFlow.Steps
                 Assert.AreEqual(product.Quantity * product.Price, orderHistoryPage.GetProductTotal(product.Name));
                 expectedTotalProductsPrice += product.Quantity * product.Price;
             }
-            Assert.AreEqual(expectedTotalProductsPrice, orderHistoryPage.GetTotalProductsPrice());
+            Assert.AreEqual(Math.Round(expectedTotalProductsPrice, 2), Math.Round(orderHistoryPage.GetTotalProductsPrice(), 2));
         }
 
         [When(@"I proceed to checkout from the Summary step")]

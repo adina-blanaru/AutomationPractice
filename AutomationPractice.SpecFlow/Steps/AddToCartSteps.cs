@@ -2,6 +2,7 @@
 using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace AutomationPractice.SpecFlow.Steps
@@ -112,7 +113,7 @@ namespace AutomationPractice.SpecFlow.Steps
             var expectedTotalProductsPrice = 0.00;
             foreach (var product in ProductPage.MyProducts)
             {
-                Assert.IsTrue(cartPage.ProductExistsInCart(product.Name));
+                Assert.IsTrue(cartPage.ProductExistsInCart(product.Name), $"{product.Name} not found in cart");
                 Assert.AreEqual(product.Size, cartPage.GetProductSize(product.Name));
                 Assert.AreEqual(product.Color, cartPage.GetProductColor(product.Name));
                 Assert.AreEqual(product.Quantity, cartPage.GetProductQuantity(product.Name));
@@ -120,7 +121,7 @@ namespace AutomationPractice.SpecFlow.Steps
                 Assert.AreEqual(product.Quantity * product.Price, cartPage.GetProductTotal(product.Name));
                 expectedTotalProductsPrice += product.Quantity * product.Price;
             }
-            Assert.AreEqual(expectedTotalProductsPrice, cartPage.GetTotalProductsPrice());
+            Assert.AreEqual(Math.Round(expectedTotalProductsPrice, 2), Math.Round(cartPage.GetTotalProductsPrice(), 2));
         }
 
         [When(@"I remove the '(\d+)(?:st|nd|rd|th)' product from the cart")]

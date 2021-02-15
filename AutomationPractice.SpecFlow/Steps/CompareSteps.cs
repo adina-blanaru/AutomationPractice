@@ -2,7 +2,6 @@
 using AutomationPractice.PageObjects.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace AutomationPractice.SpecFlow.Steps
@@ -28,7 +27,6 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             var initialCompareCount = categoryPage.GetCompareCount();
             categoryPage.AddProductTo(product, "compare");
-            Thread.Sleep(1000);
             Assert.IsTrue(categoryPage.IsAddToCompareCheckedForProduct(product));
             var finalCompareCount = categoryPage.GetCompareCount();
             Assert.AreEqual(initialCompareCount + 1, finalCompareCount);
@@ -39,7 +37,6 @@ namespace AutomationPractice.SpecFlow.Steps
         {
             var initialCompareCount = categoryPage.GetCompareCount();
             categoryPage.AddProductTo(product, "compare");
-            Thread.Sleep(1000); //TODO find another way to wait until product in added to comparison
             Assert.IsFalse(categoryPage.IsAddToCompareCheckedForProduct(product));
             var finalCompareCount = categoryPage.GetCompareCount();
             Assert.AreEqual(initialCompareCount - 1, finalCompareCount);

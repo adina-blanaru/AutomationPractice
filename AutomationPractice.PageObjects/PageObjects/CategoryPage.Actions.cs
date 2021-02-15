@@ -65,6 +65,7 @@ namespace AutomationPractice.PageObjects.PageObjects
 
         public bool IsAddToCompareCheckedForProduct(string product)
         {
+            Thread.Sleep(3000); //TODO find another way to wait until product in added to comparison
             var addToCompareButton = GetAddButtonElement(product, "compare");
             return addToCompareButton.GetAttribute("class").Contains("checked");
         }
