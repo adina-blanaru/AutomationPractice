@@ -21,4 +21,6 @@ Scenario: AddToWishlistFromProductPage
 	Given I'm logged in as 'Adina'
 	And I open a random product from 'Women' menu
 	When I add the product to whishlist
-	Then I should see the correct product in my wishlist	
+	Then I should see the correct product in my wishlist
+	When I remove the 'random' product from the wishlist
+	Then I shouldn't see the 'random' product in my wishlist

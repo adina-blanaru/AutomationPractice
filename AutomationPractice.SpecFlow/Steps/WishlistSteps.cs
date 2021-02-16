@@ -40,6 +40,8 @@ namespace AutomationPractice.SpecFlow.Steps
         [Then(@"I (should|shouldn't) see the '(.*)' product in my wishlist")]
         public void ThenIShouldSeeTheProductInMyWishlist(string exist, string product)
         {
+            if (product.Equals("random"))
+                product = ProductPage.MyProducts[0].Name;
             GoToFirstWishlist();
             if (exist.Equals("should"))
                 Assert.IsTrue(wishlistsPage.ProductExistsInWishlist(product));
@@ -57,6 +59,8 @@ namespace AutomationPractice.SpecFlow.Steps
         [When(@"I remove the '(.*)' product from the wishlist")]
         public void WhenIRemoveTheProductFromTheWishlist(string product)
         {
+            if (product.Equals("random"))
+                product = ProductPage.MyProducts[0].Name;
             wishlistsPage.RemoveProductFromWishlist(product);
         }
 
